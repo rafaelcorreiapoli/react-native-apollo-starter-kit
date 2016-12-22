@@ -1,13 +1,13 @@
 import React, {
   Component,
   PropTypes,
-} from 'react';
+} from 'react'
 
 import {
   View,
   StyleSheet,
   ActivityIndicator
-} from 'react-native';
+} from 'react-native'
 
 
 export default (ComposedComponent) =>
@@ -17,6 +17,7 @@ export default (ComposedComponent) =>
         loading
       } = this.props
 
+      console.log('wait loading ', this.props)
       if (loading ) {
         return (
           <ActivityIndicator

@@ -4,11 +4,13 @@ import React, {
 } from 'react'
 
 import {
-  View,
   Text,
   StyleSheet,
   Image
 } from 'react-native'
+
+import Overlay from '@components/Overlay'
+import Panel from '@components/Panel'
 
 export default class RestauranteItem extends Component {
 
@@ -30,44 +32,23 @@ export default class RestauranteItem extends Component {
     } = this.props
 
     return (
-      <View style={styles.container}
-        shadowColor="black"
-        shadowOffset={{width: 0, height: 2}}
-        shadowOpacity={0.2}
-        shadowRadius={2}
-      >
-
+      <Panel style={styles.container}>
         <Image
           source={{uri: backgroundUrl}}
           resizeMode={Image.resizeMode.cover}
           style={styles.image}
         >
-          <View style={[styles.absoluteBlur, styles.backDrop]} />
+          <Overlay />
           <Text style={styles.nome}>{nome}</Text>
         </Image>
-      </View>
+      </Panel>
     )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
-    flex: 1,
-    height: 120,
-    //borderWidth: 1,
-    borderColor: '#eee',
-    borderRadius: 2
-  },
-  backDrop: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)'
-  },
-  absoluteBlur: {
-    position: 'absolute',
-    left:0,
-    right:0,
-    top: 0,
-    bottom: 0
+    height: 120
   },
   image: {
     flex: 1,

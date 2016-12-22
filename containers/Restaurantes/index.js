@@ -15,8 +15,9 @@ query allRestaurantes {
 
 
 export default graphql(query, {
-  props: ({ data: { allRestaurantes, ...props } }) => ({
+  props: ({ data: { allRestaurantes, ...props }, ...otherProps}) => ({
     ...props,
+    ...otherProps,
     rows: allRestaurantes,
   })
 })(waitLoading(RestaurantesList))

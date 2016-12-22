@@ -1,20 +1,17 @@
 import React, {
   Component,
   PropTypes,
-} from 'react';
+} from 'react'
 
 import {
-  View,
   Text,
   StyleSheet,
   Image
-} from 'react-native';
-import {
-  Components
-} from 'exponent'
+} from 'react-native'
+import Overlay from '@components/Overlay'
+import Panel from '@components/Panel'
 
 export default class PromocaoItem extends Component {
-
   static defaultProps = {}
 
   static propTypes = {
@@ -22,54 +19,34 @@ export default class PromocaoItem extends Component {
   }
 
   constructor(props) {
-    super(props);
-    this.state = {};
+    super(props)
+    this.state = {}
   }
 
   render() {
     const {
       nome,
+      imagemUrl
     } = this.props
 
     return (
-      <View style={styles.container}
-        shadowColor='black'
-        shadowOffset={{width: 0, height: 2}}
-        shadowOpacity={0.2}
-        shadowRadius={2}
-      >
-
+      <Panel style={styles.container}>
         <Image
-          source={{uri: 'https://img.peixeurbano.com.br/?img=https://s3.amazonaws.com/pu-mgr/default/a0RG000000mhGvyMAE/56c30b83e4b08818c3188197.jpg&w=620&h=400'}}
+          source={{uri: imagemUrl }}
           resizeMode={Image.resizeMode.cover}
           style={styles.image}
         >
-          <View style={[styles.absoluteBlur, styles.backDrop]} />
+          <Overlay />
           <Text style={styles.nome}>{nome}</Text>
         </Image>
-      </View>
-    );
+      </Panel>
+    )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
-    flex: 1,
     height: 120,
-    //borderWidth: 1,
-    borderColor: '#eee',
-    borderRadius: 2
-  },
-  backDrop: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)'
-  },
-  absoluteBlur: {
-    position: 'absolute',
-    left:0,
-    right:0,
-    top: 0,
-    bottom: 0
   },
   image: {
     flex: 1,

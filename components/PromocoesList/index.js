@@ -1,28 +1,23 @@
 import React, {
   Component,
-  PropTypes,
-} from 'react';
+} from 'react'
 
 import {
   View,
   ListView,
   RefreshControl,
   TouchableOpacity
-} from 'react-native';
+} from 'react-native'
 import PromocaoItem from '@components/PromocaoItem'
-import listView from '../ListView'
+import dataSource from '@hocs/dataSource'
+
 class PromocoesList extends Component {
   static defaultProps = {}
 
   static propTypes = {}
 
   constructor(props) {
-    super(props);
-    this.state = {
-      loading: false,
-    };
-
-    this._refresh = this._refresh.bind(this)
+    super(props)
   }
 
   _renderSeparator(i, j, k) {
@@ -45,19 +40,11 @@ class PromocoesList extends Component {
     )
   }
 
-  _refresh() {
-    this.setState({
-      loading: true
-    })
-    // console.log('refreshing')
-    setTimeout(() => this.setState({
-      loading: false
-    }), 2000)
-  }
-
   render() {
     const {
       dataSource,
+      loading,
+      refetch
     } = this.props
 
     // console.log(dataSource)
@@ -67,8 +54,8 @@ class PromocoesList extends Component {
           renderSeparator={this._renderSeparator}
           refreshControl={
             <RefreshControl
-              refreshing={this.state.loading}
-              onRefresh={this._refresh}
+              refreshing={loading}
+              onRefresh={refetch}
             />
           }
           enableEmptySections
@@ -76,8 +63,8 @@ class PromocoesList extends Component {
           renderRow={this._renderPromocao}
         />
       </View>
-    );
+    )
   }
 }
 
-export default listView(PromocoesList)
+export default dataSource(PromocoesList)
