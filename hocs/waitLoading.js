@@ -17,7 +17,6 @@ export default (ComposedComponent) =>
         loading
       } = this.props
 
-      console.log('wait loading ', this.props)
       if (loading ) {
         return (
           <ActivityIndicator

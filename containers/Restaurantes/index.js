@@ -9,6 +9,7 @@ query allRestaurantes {
     id
     nome
     backgroundUrl
+    logoUrl
   }
 }
 `

@@ -28,7 +28,8 @@ export default class RestauranteItem extends Component {
   render() {
     const {
       nome,
-      backgroundUrl
+      backgroundUrl,
+      logoUrl
     } = this.props
 
     return (
@@ -39,6 +40,11 @@ export default class RestauranteItem extends Component {
           style={styles.image}
         >
           <Overlay />
+          <Image
+            source={{uri: logoUrl}}
+            style={styles.logo}
+            resizeMode={Image.resizeMode.contain}
+          />
           <Text style={styles.nome}>{nome}</Text>
         </Image>
       </Panel>
@@ -54,6 +60,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  logo: {
+    // backgroundColor: 'red',
+    //flex: 1,
+    width: 120,
+    // alignSelf: 'stretch',
+    height: 40
   },
   nome: {
     backgroundColor: 'transparent',

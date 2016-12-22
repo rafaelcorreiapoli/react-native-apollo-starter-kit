@@ -6,7 +6,8 @@ import React, {
 import {
   Text,
   StyleSheet,
-  Image
+  Image,
+  View
 } from 'react-native'
 import Overlay from '@components/Overlay'
 import Panel from '@components/Panel'
@@ -26,7 +27,8 @@ export default class PromocaoItem extends Component {
   render() {
     const {
       nome,
-      imagemUrl
+      imagemUrl,
+      restaurante
     } = this.props
 
     return (
@@ -36,8 +38,15 @@ export default class PromocaoItem extends Component {
           resizeMode={Image.resizeMode.cover}
           style={styles.image}
         >
+          <Image
+            source={{uri: restaurante.logoUrl}}
+            resizeMode={Image.resizeMode.contain}
+            style={styles.restauranteLogo}
+          />
           <Overlay />
-          <Text style={styles.nome}>{nome}</Text>
+          <View style={styles.footerOverlay}>
+            <Text style={styles.nome}>{nome} no {restaurante.nome}</Text>
+          </View>
         </Image>
       </Panel>
     )
@@ -46,16 +55,32 @@ export default class PromocaoItem extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: 120,
+    height: 140,
+  },
+  footerOverlay: {
+    position: 'absolute',
+    left: 0, right: 0, bottom: 0,
+    height: 50,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    paddingLeft: 10
   },
   image: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
+  restauranteLogo: {
+    width: 100,
+    height: 40,
+    position: 'absolute',
+    right: 5,
+    top: 5,
+  },
   nome: {
     backgroundColor: 'transparent',
-    fontSize: 32,
+    fontSize: 24,
     color: 'white',
     textShadowColor: 'rgba(0,0,0,0.5)',
     textShadowOffset: {

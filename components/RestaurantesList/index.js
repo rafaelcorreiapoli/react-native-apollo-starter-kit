@@ -60,7 +60,7 @@ class RestaurantesList extends Component {
       loading,
       refetch
     } = this.props
-    console.log(this.props.loading)
+
     return (
       <View style={{ flex: 1 }}>
         <ListView

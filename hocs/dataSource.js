@@ -54,7 +54,7 @@ export default (ComposedComponent) => {
       this.setState({
         loading: true
       })
-      console.log('refreshing')
+
       setTimeout(() => this.setState({
         loading: false
       }), 2000)

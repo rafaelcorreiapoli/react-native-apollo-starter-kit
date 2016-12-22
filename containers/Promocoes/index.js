@@ -11,7 +11,7 @@ query allPromocoes {
     imagemUrl
     restaurante {
       nome
-      backgroundUrl
+      logoUrl
     }
   }
 }
