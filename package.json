@@ -14,13 +14,25 @@
     "@exponent/ex-navigation": "~2.1.0",
     "@exponent/samples": "~1.0.2",
     "@exponent/vector-icons": "~2.0.3",
+    "apollo-client": "^0.5.24",
     "exponent": "~12.0.3",
+    "graphql-tag": "^1.1.2",
+    "immutable": "^3.8.1",
     "react": "~15.3.2",
+    "react-apollo": "^0.7.2",
     "react-native": "git+https://github.com/exponentjs/react-native#sdk-12.0.0",
     "react-native-grid-view": "^0.4.1",
-    "react-native-infinite-scroll-view": "^0.4.2"
+    "react-native-infinite-scroll-view": "^0.4.2",
+    "react-redux": "^5.0.1",
+    "redux": "^3.6.0",
+    "redux-actions": "^1.2.0",
+    "redux-logger": "^2.7.4",
+    "redux-saga": "^0.13.0"
   },
   "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "eslint": "^3.12.2",
+    "eslint-plugin-react": "^6.8.0",
     "jest-exponent": "~0.1.3"
   }
 }

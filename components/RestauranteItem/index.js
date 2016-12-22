@@ -1,17 +1,14 @@
 import React, {
   Component,
   PropTypes,
-} from 'react';
+} from 'react'
 
 import {
   View,
   Text,
   StyleSheet,
   Image
-} from 'react-native';
-import {
-  Components
-} from 'exponent'
+} from 'react-native'
 
 export default class RestauranteItem extends Component {
 
@@ -22,25 +19,26 @@ export default class RestauranteItem extends Component {
   }
 
   constructor(props) {
-    super(props);
-    this.state = {};
+    super(props)
+    this.state = {}
   }
 
   render() {
     const {
       nome,
+      backgroundUrl
     } = this.props
 
     return (
       <View style={styles.container}
-        shadowColor='black'
+        shadowColor="black"
         shadowOffset={{width: 0, height: 2}}
         shadowOpacity={0.2}
         shadowRadius={2}
       >
 
         <Image
-          source={{uri: 'https://img.peixeurbano.com.br/?img=https://s3.amazonaws.com/pu-mgr/default/a0RG000000mhGvyMAE/56c30b83e4b08818c3188197.jpg&w=620&h=400'}}
+          source={{uri: backgroundUrl}}
           resizeMode={Image.resizeMode.cover}
           style={styles.image}
         >
@@ -48,7 +46,7 @@ export default class RestauranteItem extends Component {
           <Text style={styles.nome}>{nome}</Text>
         </Image>
       </View>
-    );
+    )
   }
 }
 

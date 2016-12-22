@@ -18,6 +18,10 @@ import {
 import Router from './navigation/Router';
 import cacheAssetsAsync from './utilities/cacheAssetsAsync';
 import { PRIMARY_COLOR } from '@resources/colors'
+import { ApolloProvider } from 'react-apollo'
+import client from '@apollo/client'
+import configureStore from '@store'
+const store = configureStore()
 
 class AppContainer extends React.Component {
   state = {
@@ -53,16 +57,18 @@ class AppContainer extends React.Component {
   render() {
     if (this.state.appIsReady) {
       return (
-        <View style={styles.container}>
-          <NavigationProvider router={Router}>
-            <StackNavigation
-              id="root"
-              initialRoute={Router.getRoute('rootNavigation')} />
-          </NavigationProvider>
+        <ApolloProvider client={client} store={store}>
+          <View style={styles.container}>
+            <NavigationProvider router={Router}>
+              <StackNavigation
+                id="root"
+                initialRoute={Router.getRoute('rootNavigation')} />
+            </NavigationProvider>
 
-          {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
-          {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
-        </View>
+            {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
+            {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
+          </View>
+        </ApolloProvider>
       );
     } else {
       return (

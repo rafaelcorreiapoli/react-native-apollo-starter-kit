@@ -1,15 +1,12 @@
 import React, {
   Component,
-  PropTypes,
-} from 'react';
+} from 'react'
 
 import {
   View,
-  Text,
-  Button
-} from 'react-native';
+} from 'react-native'
 import RestaurantesList from '../components/RestaurantesList'
-import { PRIMARY_COLOR } from '@resources/colors'
+import Restaurantes from '@containers/Restaurantes'
 
 export default class RestaurantesScreen extends Component {
   static route = {
@@ -23,28 +20,16 @@ export default class RestaurantesScreen extends Component {
   static propTypes = {}
 
   constructor(props) {
-    super(props);
-    this.state = {};
+    super(props)
+    this.state = {}
   }
 
   render() {
-    const rows = [{
-      nome: 'Subway'
-    }, {
-      nome: 'Mc Donalds'
-    }, {
-      nome: 'Bob\'s'
-    }, {
-      nome: 'Ragazzo'
-    }, {
-      nome: 'Spoletto'
-    }]
-
     return (
       <View style={{flex : 1}}>
-        <RestaurantesList rows={rows} />
+        <Restaurantes />
       </View>
-    );
+    )
   }
 
 }
