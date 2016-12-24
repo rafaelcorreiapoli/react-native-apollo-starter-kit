@@ -1,7 +1,7 @@
 import Switch from '@components/Switch'
 import { connect } from 'react-redux'
 import { readTokenFromStorage } from '@actions/login'
-import { getToken } from '@selectors/login'
+import { getToken, getWaitingStorageAnswer } from '@selectors/login'
 
 const mapDispatchToProps = dispatch => ({
   readTokenFromStorage() {
@@ -9,7 +9,8 @@ const mapDispatchToProps = dispatch => ({
   }
 })
 const mapStateToProps = state => ({
-  token: getToken(state)
+  token: getToken(state),
+  waitingStorageAnswer: getWaitingStorageAnswer(state)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Switch)

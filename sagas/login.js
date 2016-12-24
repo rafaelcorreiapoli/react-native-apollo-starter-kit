@@ -5,6 +5,7 @@ import {
   logoutFail,
   loginWithPasswordSuccess,
   logoutSuccess,
+  setToken
 } from '@actions/login'
 import { LOGIN_WITH_PASSWORD_REQUEST, LOGOUT_REQUEST, WRITE_TOKEN_TO_STORAGE, READ_TOKEN_FROM_STORAGE, CLEAR_TOKEN_FROM_STORAGE} from '@actionTypes/login'
 import { NavigationActions } from '@exponent/ex-navigation'
@@ -13,7 +14,7 @@ function* readTokenFromStorageHandler() {
   try {
     const token = yield AsyncStorage.getItem('token')
     if (token) {
-      yield put(loginWithPasswordSuccess(token))
+      yield put(setToken(token))
     }
   } catch (e) {
     console.log(e)
@@ -23,7 +24,7 @@ function* readTokenFromStorageHandler() {
 function* clearTokenFromStorageHandler() {
   try {
     yield AsyncStorage.removeItem('token')
-    yield put(loginWithPasswordSuccess(null))
+    yield put(setToken(null))
   } catch (e) {
     console.log(e)
   }
@@ -32,7 +33,7 @@ function* clearTokenFromStorageHandler() {
 function* writeTokenToStorageHandler(action) {
   try {
     yield AsyncStorage.setItem('token', action.payload.token)
-    yield put(loginWithPasswordSuccess(action.payload.token))
+    yield put(setToken(action.payload.token))
   } catch (e) {
     console.log(e)
   }

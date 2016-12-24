@@ -51,9 +51,11 @@ export default class Switch extends Component {
 
   render() {
     const {
-      token
+      token,
+      waitingStorageAnswer
     } = this.props
 
+    console.log(waitingStorageAnswer)
     return (
       <StackNavigation
         id="root"

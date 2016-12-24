@@ -10,7 +10,8 @@ import {
   LOGOUT_FAIL,
   WRITE_TOKEN_TO_STORAGE,
   READ_TOKEN_FROM_STORAGE,
-  CLEAR_TOKEN_FROM_STORAGE
+  CLEAR_TOKEN_FROM_STORAGE,
+  SET_TOKEN
 } from '@actionTypes/login'
 
 export const setFormValue = createAction(SET_FORM_VALUE, (key, value) => ({ key, value }))
@@ -25,3 +26,4 @@ export const logoutFail = createAction(LOGOUT_FAIL)
 export const writeTokenToStorage = createAction(WRITE_TOKEN_TO_STORAGE, token => ({ token }))
 export const readTokenFromStorage = createAction(READ_TOKEN_FROM_STORAGE)
 export const clearTokenFromStorage = createAction(CLEAR_TOKEN_FROM_STORAGE)
+export const setToken = createAction(SET_TOKEN, token => ({ token }))
