@@ -1,25 +1,25 @@
-import React from 'react';
+import React from 'react'
 import {
   StyleSheet,
   View,
   StatusBar
-} from 'react-native';
+} from 'react-native'
 import {
   Notifications,
-} from 'exponent';
+} from 'exponent'
 import {
   StackNavigation,
   TabNavigation,
   TabNavigationItem,
-} from '@exponent/ex-navigation';
+} from '@exponent/ex-navigation'
 import {
   FontAwesome,
   Ionicons
-} from '@exponent/vector-icons';
+} from '@exponent/vector-icons'
 import { PRIMARY_COLOR } from '@resources/colors'
-import Alerts from '../constants/Alerts';
-import Colors from '../constants/Colors';
-import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
+import Alerts from '../constants/Alerts'
+import Colors from '../constants/Colors'
+import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync'
 
 const defaultRouteConfig = {
   navigationBar: {
@@ -30,11 +30,11 @@ const defaultRouteConfig = {
 
 export default class RootNavigation extends React.Component {
   componentDidMount() {
-    this._notificationSubscription = this._registerForPushNotifications();
+    this._notificationSubscription = this._registerForPushNotifications()
   }
 
   componentWillUnmount() {
-    this._notificationSubscription && this._notificationSubscription.remove();
+    this._notificationSubscription && this._notificationSubscription.remove()
   }
 
   render() {
@@ -84,7 +84,7 @@ export default class RootNavigation extends React.Component {
           />
         </TabNavigationItem>
       </TabNavigation>
-    );
+    )
   }
 
   _renderIcon(name, outlineName, isSelected) {
@@ -95,7 +95,7 @@ export default class RootNavigation extends React.Component {
         //  color={isSelected ? Colors.tabIconSelected : Colors.tabIconDefault}
         color={Colors.tabIconDefault}
       />
-    );
+    )
   }
 
   _registerForPushNotifications() {
@@ -103,17 +103,17 @@ export default class RootNavigation extends React.Component {
     // You can comment the following line out if you want to stop receiving
     // a notification every time you open the app. Check out the source
     // for this function in api/registerForPushNotificationsAsync.js
-    registerForPushNotificationsAsync();
+    registerForPushNotificationsAsync()
 
     // Watch for incoming notifications
-    this._notificationSubscription = Notifications.addListener(this._handleNotification);
+    this._notificationSubscription = Notifications.addListener(this._handleNotification)
   }
 
   _handleNotification = ({origin, data}) => {
     this.props.navigator.showLocalAlert(
       `Push notification ${origin} with data: ${JSON.stringify(data)}`,
       Alerts.notice
-    );
+    )
   }
 }
 
@@ -125,4 +125,4 @@ const styles = StyleSheet.create({
   selectedTab: {
     color: Colors.tabIconSelected,
   },
-});
+})

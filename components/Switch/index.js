@@ -3,10 +3,23 @@ import React, {
   PropTypes,
 } from 'react'
 import {
+  withNavigation,
   StackNavigation,
 } from '@exponent/ex-navigation'
 import Router from '../../navigation/Router'
 
+const isLoggedIn = token => {
+  return !!token
+}
+
+const getInitialRoute = token => {
+  if (isLoggedIn(token)) {
+    return 'rootNavigation'
+  }
+  return 'guestNavigation'
+}
+
+@withNavigation
 export default class Switch extends Component {
 
   static defaultProps = {}
@@ -18,23 +31,33 @@ export default class Switch extends Component {
     this.state = {}
   }
 
+  componentDidMount() {
+    this.props.readTokenFromStorage()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {
+      token
+    } = this.props
+    const rootNavigator = this.props.navigation.getNavigator('root')
+
+    if (isLoggedIn(nextProps.token) && !isLoggedIn(token)) {
+      rootNavigator.replace(Router.getRoute('rootNavigation'))
+    } else if (!isLoggedIn(nextProps.token) && isLoggedIn(token)) {
+      rootNavigator.replace(Router.getRoute('guestNavigation'))
+    }
+  }
+
+
   render() {
     const {
-      user
+      token
     } = this.props
-
-    if (user) {
-      return (
-        <StackNavigation
-          id="root"
-          initialRoute={Router.getRoute('rootNavigation')} />
-      )
-    }
 
     return (
       <StackNavigation
-        id="welcome"
-        initialRoute={Router.getRoute('welcome')} />
+        id="root"
+        initialRoute={Router.getRoute(getInitialRoute(token))} />
     )
   }
 

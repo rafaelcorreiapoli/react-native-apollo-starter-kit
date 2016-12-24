@@ -35,6 +35,7 @@ class RestaurantesList extends Component {
     }
 
     this._renderRestaurante = this._renderRestaurante.bind(this)
+    this._handleLogout = this._handleLogout.bind(this)
   }
 
   _renderRestaurante(restaurante) {
@@ -49,7 +50,9 @@ class RestaurantesList extends Component {
       </TouchableOpacity>
     )
   }
-
+  _handleLogout() {
+    this.props.logout()
+  }
   async _handleLogin () {
     const { type, token } = await Exponent.Facebook.logInWithReadPermissionsAsync(
       '608769742665066', {
@@ -101,6 +104,9 @@ class RestaurantesList extends Component {
         />
         <Button onPress={this._handleLogin}
           title="FB Login"
+        />
+        <Button onPress={this._handleLogout}
+          title="LOGOUT"
         />
       </View>
     )

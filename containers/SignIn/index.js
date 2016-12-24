@@ -3,15 +3,15 @@ import { connect } from 'react-redux'
 import { AsyncStorage } from 'react-native'
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
-
+import { writeTokenToStorage } from '@actions/login'
 
 const mapStateToProps = state => ({
 
 })
 
 const mapDispatchToProps = dispatch => ({
-  async writeTokenToStorage(token) {
-    await AsyncStorage.setItem('token', token)
+  writeTokenToStorage(token) {
+    dispatch(writeTokenToStorage(token))
   },
 })
 

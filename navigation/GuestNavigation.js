@@ -24,6 +24,7 @@ export default class GuestNavigation extends Component {
   render() {
     return (
       <StackNavigation
+        id="guest"
         initialRoute="welcome"
       />
     )

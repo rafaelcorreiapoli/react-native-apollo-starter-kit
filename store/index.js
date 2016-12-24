@@ -5,7 +5,6 @@ import createSagaMiddleware from 'redux-saga'
 import loginSaga from '@sagas/login'
 import createLogger from 'redux-logger'
 
-const logger = createLogger()
 const createStoreWithNavigation = createNavigationEnabledStore({
   createStore,
   navigationStateKey: 'navigation',
@@ -22,7 +21,7 @@ export default (initialState = {}) => {
   const enhancer = compose(
     applyMiddleware(
       sagaMiddleware,
-      logger
+      loggerMiddleware
     )
   )
 

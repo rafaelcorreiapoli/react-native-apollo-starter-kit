@@ -21,7 +21,7 @@ import Switch from '@containers/Switch'
 import { ApolloProvider } from 'react-apollo'
 import client from '@apollo/client'
 import configureStore from '@store'
-const store = configureStore()
+export const store = configureStore()
 
 class AppContainer extends React.Component {
   state = {
@@ -86,5 +86,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.2)',
   },
 })
+
 
 Exponent.registerRootComponent(AppContainer)
