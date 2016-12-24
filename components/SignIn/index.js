@@ -7,13 +7,16 @@ import {
   View,
   Text,
   StyleSheet,
-  TextInput,
-  Button,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert,
+  ActivityIndicator,
 } from 'react-native'
-
-import { ACCENT_COLOR } from '@resources/colors'
-
+import Exponent from 'exponent'
+import facebookConfig from '@config/facebook'
+import Button from '@components/Button'
+import TextInput from '@components/TextInput'
+import { PRIMARY_COLOR, ACCENT_COLOR } from '@resources/colors'
+import Overlay from 'react-native-overlay'
 export default class SignIn extends Component {
 
   static defaultProps = {}
@@ -22,27 +25,54 @@ export default class SignIn extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {}
-
-    console.log(props)
+    this.state = {
+      loading: false,
+    }
   }
 
-  _handleMutate() {
-    console.log(this.props)
-    this.props.createTechnology({
-      variables: {
-        input: {
-          'name': 'Created by react-native',
-          'techId': '123',
-          'status': 'Draft'
+  _alertError(description) {
+    Alert.alert(
+      'Erro',
+      description
+    )
+  }
+
+  async _handleLoginWithFacebook() {
+    const {
+      writeTokenToStorage,
+      loginWithFacebook
+    } = this.props
+
+    const { type, token: facebookToken } = await Exponent.Facebook.logInWithReadPermissionsAsync(facebookConfig.appId, {
+      permissions: facebookConfig.permissions,
+    })
+
+    if (type === 'success') {
+      this.setState({
+        loading: true
+      })
+      loginWithFacebook({
+        variables: {
+          input: {
+            access_token: facebookToken,
+            connection: 'facebook'
+          }
         }
-      }
-    })
-    .then(({ data }) => {
-      console.log('got data', data)
-    }).catch((error) => {
-      console.log('there was an error sending the query', error)
-    })
+      })
+      .then(({ data }) => {
+        this.setState({loading: false})
+        const token = data.loginUserWithAuth0Social && data.loginUserWithAuth0Social.token
+        if (token) {
+          writeTokenToStorage(token)
+        }
+      })
+      .catch((error) => {
+        this.setState({loading: false})
+        console.log('there was an error sending the query', error)
+      })
+    } else {
+      this._alertError(`Erro de login com Facebook: ${type}`)
+    }
   }
 
   _handleLoginWithPassword() {
@@ -51,7 +81,10 @@ export default class SignIn extends Component {
       loginWithPassword
     } = this.props
 
-    loginWithPassword({
+    this.setState({
+      loading: true
+    })
+    const a = () => loginWithPassword({
       variables: {
         input: {
           'username': 'editor',
@@ -60,71 +93,65 @@ export default class SignIn extends Component {
       }
     })
     .then(({ data }) => {
-      console.log('got data', data)
       const token = data.loginUser && data.loginUser.token
+      this.setState({
+        loading: true
+      })
       if (token) {
         writeTokenToStorage(token)
       }
     }).catch((error) => {
-      console.log('there was an error sending the query', error)
+      this.setState({
+        loading: false
+      })
+      this._alertError(`Erro enviando mensagem ao servidor ${error.toString()}`)
     })
-  }
-  render() {
-    const {
-      loginWithPassword,
-      mutate
-    } = this.props
 
-    console.log(mutate)
+    setTimeout(a, 2000)
+  }
+
+  render() {
     return (
       <View style={[styles.container, styles.background]}>
-        <View style={styles.container} />
+        <View style={[styles.container, {zIndex: 500}]}>
+          <View style={styles.container} />
 
-        <View style={styles.formWrapper}>
-          <Text style={styles.title}>Tastefy</Text>
-          <View style={styles.inputWrapper}>
+          <View style={styles.formWrapper}>
+            <Text style={styles.title}>Tastefy</Text>
             <TextInput
               placeholder="E-mail"
-              style={styles.input}
+              editable={!this.state.loading}
+              autoCapitalize="none"
             />
-          </View>
-          <View style={styles.inputWrapper}>
             <TextInput
               placeholder="Password"
+              editable={!this.state.loading}
+              autoCapitalize="none"
               secureTextEntry
-              style={styles.input}
+            />
+            <Button
+              title="Sign In"
+              backgroundColor={ACCENT_COLOR}
+              disabled={this.state.loading}
+              onPress={this._handleLoginWithPassword.bind(this)}
+              style={styles.signInButton}
+            />
+            <Button
+              title="Login with Facebook"
+              backgroundColor="rgb(31, 59, 157)"
+              disabled={this.state.loading}
+              onPress={this._handleLoginWithFacebook.bind(this)}
+              style={styles.facebookButton}
+            />
+            <Button
+              title="Forgot Password?"
+              disabled={this.state.loading}
+
             />
           </View>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            onPress={this._handleLoginWithPassword.bind(this)}
-          >
-            <View style={styles.button}>
-              <Text style={styles.buttonText}>Sign In</Text>
-            </View>
-          </TouchableOpacity>
 
-          <TouchableOpacity
-            activeOpacity={0.5}
-            onPress={this._handleMutate.bind(this)}
-          >
-            <View style={styles.button}>
-              <Text style={styles.buttonText}>Mutate</Text>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            activeOpacity={0.5}
-          >
-            <Text
-              style={styles.forgotPassword}
-            >
-              Forgot password?
-            </Text>
-          </TouchableOpacity>
-
+          <View style={styles.container} />
         </View>
-        <View style={styles.container} />
 
       </View>
     )
@@ -136,37 +163,16 @@ const styles = StyleSheet.create({
     flex: 1
   },
   background: {
-    backgroundColor: '#Ac56AB'
-  },
-  inputWrapper: {
-    flexDirection: 'row',
-    height: 40,
-    marginVertical : 10,
-    backgroundColor: 'transparent'
-  },
-  button: {
-    backgroundColor: 'red',
-    marginBottom: 20,
-    paddingVertical: 15,
-    marginVertical: 15,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  buttonText: {
-    fontSize: 18,
-    color: '#FFF'
-  },
-  forgotPassword: {
-    textAlign: 'center',
-    color: '#FFF'
+    backgroundColor: PRIMARY_COLOR
   },
   formWrapper: {
     paddingHorizontal: 15
   },
-  input: {
-    flex: 1,
-    paddingHorizontal: 10,
-    backgroundColor: '#FFF'
+  signInButton: {
+    marginVertical: 15,
+  },
+  facebookButton: {
+    marginBottom: 15,
   },
   title: {
     fontSize: 42,

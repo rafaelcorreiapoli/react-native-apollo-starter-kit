@@ -5,11 +5,11 @@ import React, {
 
 import {
   View,
-  Text,
-  Button
-} from 'react-native'
 
-export default class Welcome extends Component {
+} from 'react-native'
+import Welcome from '@components/Welcome'
+
+export default class WelcomeScreen extends Component {
 
   static defaultProps = {}
 
@@ -22,12 +22,8 @@ export default class Welcome extends Component {
 
   render() {
     return (
-      <View>
-        <Text>Welcome</Text>
-        <Button
-          title="Sign In"
-          onPress={() => this.props.navigator.push('signIn')}
-        />
+      <View style={{ flex: 1 }}>
+        <Welcome />
       </View>
     )
   }

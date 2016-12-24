@@ -9,13 +9,11 @@ import {
   RefreshControl,
   TouchableOpacity,
   Button,
-  Alert
 } from 'react-native'
 import { withNavigation } from '@exponent/ex-navigation'
-import InfiniteScrollView from 'react-native-infinite-scroll-view'
 import RestauranteItem from '../RestauranteItem'
 import makeDataSource from '@hocs/dataSource'
-import Exponent from 'exponent'
+
 
 @withNavigation
 class RestaurantesList extends Component {
@@ -53,27 +51,6 @@ class RestaurantesList extends Component {
   _handleLogout() {
     this.props.logout()
   }
-  async _handleLogin () {
-    const { type, token } = await Exponent.Facebook.logInWithReadPermissionsAsync(
-      '608769742665066', {
-        permissions: ['public_profile'],
-      })
-    if (type === 'success') {
-      // Get the user's name using Facebook's Graph API
-      const response = await fetch(
-        `https://graph.facebook.com/me?access_token=${token}`)
-
-        console.log(token)
-      Alert.alert(
-        token,
-        `Hi ${(await response.json()).name}!`,
-      )
-    } else {
-      Alert.alert(
-        type
-      )
-    }
-  }
 
   _renderSeparator(i, j, k) {
     return (
@@ -101,9 +78,6 @@ class RestaurantesList extends Component {
           enableEmptySections
           dataSource={dataSource}
           renderRow={this._renderRestaurante}
-        />
-        <Button onPress={this._handleLogin}
-          title="FB Login"
         />
         <Button onPress={this._handleLogout}
           title="LOGOUT"

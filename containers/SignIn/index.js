@@ -35,9 +35,18 @@ const loginWithPassword = gql`
   }
 `
 
+const loginWithFacebook = gql`
+  mutation LoginWithFacebook($input: LoginUserWithAuth0SocialInput!) {
+    loginUserWithAuth0Social(input:$input) {
+      token
+    }
+  }
+`
+
 
 export default compose(
   graphql(createTechnology, {name: 'createTechnology'}),
   graphql(loginWithPassword, {name: 'loginWithPassword'}),
+  graphql(loginWithFacebook, { name: 'loginWithFacebook'}),
   connect(mapStateToProps, mapDispatchToProps)
 )(SignIn)
