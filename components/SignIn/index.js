@@ -23,9 +23,59 @@ export default class SignIn extends Component {
   constructor(props) {
     super(props)
     this.state = {}
+
+    console.log(props)
   }
 
+  _handleMutate() {
+    console.log(this.props)
+    this.props.createTechnology({
+      variables: {
+        input: {
+          'name': 'Created by react-native',
+          'techId': '123',
+          'status': 'Draft'
+        }
+      }
+    })
+    .then(({ data }) => {
+      console.log('got data', data)
+    }).catch((error) => {
+      console.log('there was an error sending the query', error)
+    })
+  }
+
+  _handleLoginWithPassword() {
+    const {
+      writeTokenToStorage,
+      loginWithPassword
+    } = this.props
+
+    loginWithPassword({
+      variables: {
+        input: {
+          'username': 'editor',
+          'password': 'q1w2e3',
+        }
+      }
+    })
+    .then(({ data }) => {
+      console.log('got data', data)
+      const token = data.loginUser && data.loginUser.token
+      if (token) {
+        writeTokenToStorage(token)
+      }
+    }).catch((error) => {
+      console.log('there was an error sending the query', error)
+    })
+  }
   render() {
+    const {
+      loginWithPassword,
+      mutate
+    } = this.props
+
+    console.log(mutate)
     return (
       <View style={[styles.container, styles.background]}>
         <View style={styles.container} />
@@ -47,10 +97,19 @@ export default class SignIn extends Component {
           </View>
           <TouchableOpacity
             activeOpacity={0.5}
-            onPress={() => {}}
+            onPress={this._handleLoginWithPassword.bind(this)}
           >
             <View style={styles.button}>
               <Text style={styles.buttonText}>Sign In</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={this._handleMutate.bind(this)}
+          >
+            <View style={styles.button}>
+              <Text style={styles.buttonText}>Mutate</Text>
             </View>
           </TouchableOpacity>
 
