@@ -1,29 +1,26 @@
 import React, {
   Component,
   PropTypes,
-} from 'react';
+} from 'react'
 
 import {
   View,
   ListView,
   RefreshControl,
   TouchableOpacity
-} from 'react-native';
-import PromocaoItem from '@components/PromocaoItem'
-import listView from '../ListView'
+} from 'react-native'
+import VoucherItem from '@components/VoucherItem'
+import dataSource from '@hocs/dataSource'
 
 class VouchersList extends Component {
-  static defaultProps = {}
+  static defaultProps = {
+    rows: []
+  }
 
   static propTypes = {}
 
   constructor(props) {
-    super(props);
-    this.state = {
-      loading: false,
-    };
-
-    this._refresh = this._refresh.bind(this)
+    super(props)
   }
 
   _renderSeparator(i, j, k) {
@@ -32,31 +29,24 @@ class VouchersList extends Component {
     )
   }
 
-  _renderPromocao(promocao) {
+  _renderVoucher(promocao) {
     return (
       <TouchableOpacity
         style={{marginLeft: 0, marginRight: 0}}
-        onPress={() => this.props.navigator.push('promocaoDetail')}
+        onPress={() => this.props.navigator.push('voucherDetail')}
       >
-        <PromocaoItem
+        <VoucherItem
           {...promocao}
         />
       </TouchableOpacity>
     )
   }
 
-  _refresh() {
-    this.setState({
-      loading: true
-    })
-    setTimeout(() => this.setState({
-      loading: false
-    }), 2000)
-  }
-
   render() {
     const {
       dataSource,
+      loading,
+      refetch,
     } = this.props
 
     return (
@@ -65,17 +55,17 @@ class VouchersList extends Component {
           renderSeparator={this._renderSeparator}
           refreshControl={
             <RefreshControl
-              refreshing={this.state.loading}
-              onRefresh={this._refresh}
+              refreshing={loading}
+              onRefresh={refetch}
             />
           }
           enableEmptySections
           dataSource={dataSource}
-          renderRow={this._renderPromocao}
+          renderRow={this._renderVoucher}
         />
       </View>
-    );
+    )
   }
 }
 
-export default listView(VouchersList)
+export default dataSource(VouchersList)

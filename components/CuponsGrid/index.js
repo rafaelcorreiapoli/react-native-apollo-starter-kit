@@ -1,30 +1,28 @@
 import React, {
   Component,
   PropTypes,
-} from 'react';
+} from 'react'
 
 import {
   View,
   ListView,
   RefreshControl,
-  TouchableOpacity
-} from 'react-native';
+  TouchableOpacity,
+  StyleSheet
+} from 'react-native'
 import CupomItem from '@components/CupomItem'
-import listView from '../ListView'
+import dataSource from '@hocs/dataSource'
 import GridView from 'react-native-grid-view'
 
 class CuponsGrid extends Component {
-  static defaultProps = {}
+  static defaultProps = {
+    rows: []
+  }
 
   static propTypes = {}
 
   constructor(props) {
-    super(props);
-    this.state = {
-      loading: false,
-    };
-
-    this._refresh = this._refresh.bind(this)
+    super(props)
   }
 
   _renderSeparator(i, j, k) {
@@ -37,40 +35,50 @@ class CuponsGrid extends Component {
     return (
       <TouchableOpacity
         key={i}
-        style={{marginLeft: 0, marginRight: 0}}
+        style={{marginLeft: 0, marginRight: 0, alignItems: 'center'}}
         onPress={() => this.props.navigator.push('promocaoDetail')}
       >
         <CupomItem
           {...cupom}
+          style={styles.cupom}
         />
       </TouchableOpacity>
     )
   }
 
-  _refresh() {
-    this.setState({
-      loading: true
-    })
-    setTimeout(() => this.setState({
-      loading: false
-    }), 2000)
-  }
 
   render() {
     const {
       rows,
+      loading,
+      refetch,
+      dataSource
     } = this.props
 
     return (
       <View style={{ flex: 1 }}>
-        <GridView
-          items={rows}
-          itemsPerRow={2}
-          renderItem={this._renderCupom}
+        <ListView
+          renderSeparator={this._renderSeparator}
+          refreshControl={
+            <RefreshControl
+              refreshing={loading}
+              onRefresh={refetch}
+            />
+          }
+          enableEmptySections
+          dataSource={dataSource}
+          renderRow={this._renderCupom}
         />
       </View>
-    );
+    )
   }
 }
 
-export default CuponsGrid
+const styles = StyleSheet.create({
+  cupom: {
+    width: 200,
+    height: 200
+  }
+})
+
+export default dataSource(CuponsGrid)

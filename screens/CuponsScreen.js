@@ -1,13 +1,12 @@
 import React, {
   Component,
-  PropTypes,
-} from 'react';
+} from 'react'
 
 import {
   View,
-  Text
-} from 'react-native';
-import CuponsGrid from '@components/CuponsGrid'
+} from 'react-native'
+import Cupons from '@containers/Cupons'
+
 export default class CuponsScreen extends Component {
   static route = {
     navigationBar: {
@@ -20,27 +19,16 @@ export default class CuponsScreen extends Component {
   static propTypes = {}
 
   constructor(props) {
-    super(props);
-    this.state = {};
+    super(props)
+    this.state = {}
   }
 
   render() {
-    const rows = [{
-      nome: 'Cupom 1'
-    }, {
-      nome: 'Cupom 2'
-    }, {
-      nome: 'Cupom 3'
-    }, {
-      nome: 'Cupom 4'
-    }, {
-      nome: 'Cupom 5'
-    }]
     return (
-      <View style={{flex : 1}}>
-        <CuponsGrid rows={rows} />
+      <View style={{flex : 1, backgroundColor: '#eeeeee'}}>
+        <Cupons />
       </View>
-    );
+    )
   }
 
 }

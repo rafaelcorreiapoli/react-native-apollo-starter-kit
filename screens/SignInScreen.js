@@ -1,18 +1,16 @@
 import React, {
   Component,
+  PropTypes,
 } from 'react'
 
 import {
   View,
+  Text,
+  Button
 } from 'react-native'
-import Vouchers from '@containers/Vouchers'
+import SignIn from '@containers/SignIn'
 
-export default class VouchersScreen extends Component {
-  static route = {
-    navigationBar: {
-      title: 'Vouchers',
-    },
-  }
+export default class SignInScreen extends Component {
 
   static defaultProps = {}
 
@@ -24,10 +22,9 @@ export default class VouchersScreen extends Component {
   }
 
   render() {
-
     return (
-      <View style={{ flex: 1 }}>
-        <Vouchers />
+      <View style={{flex: 1}}>
+        <SignIn />
       </View>
     )
   }

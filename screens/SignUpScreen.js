@@ -1,18 +1,15 @@
 import React, {
   Component,
+  PropTypes,
 } from 'react'
 
 import {
   View,
+  Text,
+  Button
 } from 'react-native'
-import Vouchers from '@containers/Vouchers'
 
-export default class VouchersScreen extends Component {
-  static route = {
-    navigationBar: {
-      title: 'Vouchers',
-    },
-  }
+export default class SignUp extends Component {
 
   static defaultProps = {}
 
@@ -24,10 +21,13 @@ export default class VouchersScreen extends Component {
   }
 
   render() {
-
     return (
-      <View style={{ flex: 1 }}>
-        <Vouchers />
+      <View>
+        <Text>SignUp</Text>
+        <Button
+          title="Back"
+          onPress={() => this.props.navigator.pop()}
+        />
       </View>
     )
   }

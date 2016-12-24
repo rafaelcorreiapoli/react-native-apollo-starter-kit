@@ -19,6 +19,8 @@
     "assetExts": ["ttf"]
   },
   "ios": {
+    "bundleIdentifier": "com.tdb",
     "supportsTablet": true
-  }
+  },
+  "facebookScheme": "fb608769742665066"
 }

@@ -25,7 +25,6 @@ class PromocoesList extends Component {
       <View key={j} style={{height: 5}} />
     )
   }
-
   _renderPromocao(promocao) {
     // // console.log(promocao)
     return (
