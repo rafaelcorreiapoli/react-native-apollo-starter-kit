@@ -124,7 +124,8 @@ export default class SignIn extends Component {
           <View style={styles.container} />
 
           <View style={styles.formWrapper}>
-            <Text style={styles.title}>Tastefy 2</Text>
+            <Text style={styles.title}>ASK</Text>
+            <Text style={styles.subtitle}>Apollo Starter Kit</Text>
             <TextInput
               placeholder="E-mail"
               editable={!this.state.loading}
@@ -188,7 +189,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 42,
     textAlign: 'center',
-    marginBottom: 15,
+
     color: '#FFF'
+  },
+  subtitle: {
+    color: '#d3d3d3',
+    textAlign: 'center',
+    marginBottom: 15,
   }
 })
