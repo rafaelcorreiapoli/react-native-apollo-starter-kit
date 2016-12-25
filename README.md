@@ -1,4 +1,6 @@
+:gift::gift::gift::gift::gift::gift::gift::gift::gift::gift:
 # apollo-starter-kit
+:christmas_tree::christmas_tree::christmas_tree::christmas_tree::christmas_tree::christmas_tree::christmas_tree::christmas_tree::christmas_tree::christmas_tree:
 
 This is a starter kit for React Native and Apollo, using ExponentJS framework
 references:
@@ -14,15 +16,24 @@ https://docs.getexponent.com/versions/v12.0.0/introduction/installation.html
 - Redux
 - Immutable
 - Sagas for dealing with async redux
-- Navigation with tabs and stacks (TODO: Drawer for android)
+- Navigation with tabs and stacks
 - Apollo containers with queries and mutations
-- Components for displaying lists with pull to refresh, using Apollo refetch
+- Lists for displaying contents from GraphQL with pull to refresh, using Apollo refetch
 - Basic screens like Onboarding, Login, Register, Forgot password
 - Login with password and facebook (uses LocalStorage to store JWT)
 - Fastlane with pilot to upload .ipa app to TestFlight (The .ipa can be generated with ExponentJS)
 - A screen that uses camera
+- HOCS pattern
+
+# Configuration
+## Facebook
+To configure Facebook login, open the file ```config/facebook.js```
+## Colors
+To configure colors, change the file ```resoures/colors.js```
 
 # TODO
-- Drawer for android
-- A screen that uses maps
-- Better fastlane configuration
+- [ ] Drawer for android
+- [ ] A screen that uses maps
+- [ ] Better fastlane configuration
+- [ ] Clear some old files/code
+- [ ] Push notifications with ExponentJS
