@@ -2,7 +2,8 @@
 # apollo-starter-kit
 :christmas_tree::christmas_tree::christmas_tree::christmas_tree::christmas_tree::christmas_tree::christmas_tree::christmas_tree::christmas_tree::christmas_tree:
 
-This is a starter kit for React Native and Apollo, using ExponentJS framework
+### This is a starter kit for React Native and Apollo, using ExponentJS framework
+
 references:
 - Apollo: https://github.com/apollostack/apollo
 - React Native: https://facebook.github.io/react-native/
@@ -30,6 +31,12 @@ https://docs.getexponent.com/versions/v12.0.0/introduction/installation.html
 To configure Facebook login, open the file ```config/facebook.js```
 ## Colors
 To configure colors, change the file ```resoures/colors.js```
+## GraphQL
+To configure the GraphQL endpoint, change the file ```apollo/client.js```
+
+# GraphQL Server
+You can create your own graphql server or use this awesome GraphQL-as-a-service:
+https://scaphold.io/
 
 # TODO
 - [ ] Drawer for android
