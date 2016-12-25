@@ -1,7 +1,7 @@
 {
-  "name": "valeu-caronas",
+  "name": "apollo-starter-kit",
   "version": "0.0.0",
-  "description": "Hello Exponent!",
+  "description": "A nice starter kit with Apollo",
   "author": null,
   "main": "main.js",
   "scripts": {
