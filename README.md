@@ -1,5 +1,5 @@
 :gift::gift::gift::gift::gift::gift::gift::gift::gift::gift:
-# apollo-starter-kit
+# React Native Apollo Starter Kit
 :christmas_tree::christmas_tree::christmas_tree::christmas_tree::christmas_tree::christmas_tree::christmas_tree::christmas_tree::christmas_tree::christmas_tree:
 
 ### This is a starter kit for React Native and Apollo, using ExponentJS framework
