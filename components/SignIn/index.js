@@ -79,17 +79,19 @@ export default class SignIn extends Component {
   _handleLoginWithPassword() {
     const {
       writeTokenToStorage,
-      loginWithPassword
+      loginWithPassword,
+      login: username,
+      password
     } = this.props
 
     this.setState({
       loading: true
     })
-    const a = () => loginWithPassword({
+    loginWithPassword({
       variables: {
         input: {
-          'username': 'editor',
-          'password': 'q1w2e3',
+          username,
+          password
         }
       }
     })
@@ -107,26 +109,34 @@ export default class SignIn extends Component {
       })
       this._alertError(`Erro enviando mensagem ao servidor ${error.toString()}`)
     })
-
-    setTimeout(a, 2000)
   }
 
   render() {
+    const {
+      setFormValue,
+      login,
+      password
+    } = this.props
+
     return (
       <View style={[styles.container, styles.background]}>
         <View style={[styles.container, {zIndex: 500}]}>
           <View style={styles.container} />
 
           <View style={styles.formWrapper}>
-            <Text style={styles.title}>Tastefy</Text>
+            <Text style={styles.title}>Tastefy 2</Text>
             <TextInput
               placeholder="E-mail"
               editable={!this.state.loading}
+              onChangeText={v => setFormValue('login', v)}
+              value={login}
               autoCapitalize="none"
             />
             <TextInput
               placeholder="Password"
               editable={!this.state.loading}
+              onChangeText={v => setFormValue('password', v)}
+              value={password}
               autoCapitalize="none"
               secureTextEntry
             />

@@ -3,16 +3,21 @@ import { connect } from 'react-redux'
 import { AsyncStorage } from 'react-native'
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
-import { writeTokenToStorage } from '@actions/login'
+import { writeTokenToStorage, setFormValue } from '@actions/login'
+import { getLogin, getPassword } from '@selectors/login'
 
 const mapStateToProps = state => ({
-
+  login: getLogin(state),
+  password: getPassword(state)
 })
 
 const mapDispatchToProps = dispatch => ({
   writeTokenToStorage(token) {
     dispatch(writeTokenToStorage(token))
   },
+  setFormValue(key, value) {
+    dispatch(setFormValue(key, value))
+  }
 })
 
 const createTechnology = gql`
