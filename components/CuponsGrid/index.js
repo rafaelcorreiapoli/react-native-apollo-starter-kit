@@ -12,7 +12,6 @@ import {
 } from 'react-native'
 import CupomItem from '@components/CupomItem'
 import dataSource from '@hocs/dataSource'
-import GridView from 'react-native-grid-view'
 
 class CuponsGrid extends Component {
   static defaultProps = {

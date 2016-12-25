@@ -16,7 +16,8 @@ import facebookConfig from '@config/facebook'
 import Button from '@components/Button'
 import TextInput from '@components/TextInput'
 import { PRIMARY_COLOR, ACCENT_COLOR } from '@resources/colors'
-import Overlay from 'react-native-overlay'
+
+
 export default class SignIn extends Component {
 
   static defaultProps = {}
